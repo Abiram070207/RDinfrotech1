@@ -1,2 +1,224 @@
-*Artificial intelligence Internship*
-* Tic Tac Toe AI
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tic-Tac-Toe AI</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      background: linear-gradient(to right, #ffecd2, #fcb69f);
+      margin: 0;
+      padding: 40px 0;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      gap: 10px;
+      justify-content: center;
+      margin: auto;
+    }
+
+    .cell {
+      width: 100px;
+      height: 100px;
+      background: #ffffffaa;
+      border: 2px solid #333;
+      border-radius: 12px;
+      font-size: 2.5em;
+      color: #444;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.1s;
+    }
+
+    .cell:hover {
+      background: #ff9a8b;
+      transform: scale(1.05);
+    }
+
+    #status {
+      margin-top: 20px;
+      font-size: 1.4em;
+      font-weight: bold;
+      color: #222;
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 12px 24px;
+      font-size: 1em;
+      border: none;
+      border-radius: 8px;
+      background: #ff758c;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #ff5e7e;
+    }
+
+    .win {
+      background-color: #81ecec !important;
+      color: #2d3436;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Tic-Tac-Toe vs AI</h1>
+<div class="board" id="board"></div>
+<div id="status"></div>
+<button onclick="resetGame()">Restart Game</button>
+
+<script>
+  const HUMAN = 'X';
+  const AI = 'O';
+  let board = ["", "", "", "", "", "", "", "", ""];
+  let gameOver = false;
+
+  const winCombos = [
+    [0,1,2],[3,4,5],[6,7,8],
+    [0,3,6],[1,4,7],[2,5,8],
+    [0,4,8],[2,4,6]
+  ];
+
+  const cells = [];
+
+  function createBoard() {
+    const boardDiv = document.getElementById("board");
+    boardDiv.innerHTML = '';
+    for (let i = 0; i < 9; i++) {
+      const cell = document.createElement("div");
+      cell.className = "cell";
+      cell.addEventListener("click", () => humanMove(i));
+      boardDiv.appendChild(cell);
+      cells.push(cell);
+    }
+    updateBoard();
+  }
+
+  function updateBoard() {
+    for (let i = 0; i < 9; i++) {
+      cells[i].textContent = board[i];
+    }
+  }
+
+  function humanMove(index) {
+    if (board[index] === "" && !gameOver) {
+      board[index] = HUMAN;
+      updateBoard();
+      if (checkWinner(board, HUMAN)) {
+        highlightWinner(HUMAN);
+        endGame("🎉 You win!");
+      }
+      else if (isDraw()) endGame("It's a draw!");
+      else aiMove();
+    }
+  }
+
+  function aiMove() {
+    let bestScore = -Infinity;
+    let move;
+    for (let i = 0; i < 9; i++) {
+      if (board[i] === "") {
+        board[i] = AI;
+        let score = minimax(board, 0, false);
+        board[i] = "";
+        if (score > bestScore) {
+          bestScore = score;
+          move = i;
+        }
+      }
+    }
+    board[move] = AI;
+    updateBoard();
+    if (checkWinner(board, AI)) {
+      highlightWinner(AI);
+      endGame("🤖 AI wins!");
+    }
+    else if (isDraw()) endGame("It's a draw!");
+  }
+
+  function minimax(newBoard, depth, isMaximizing) {
+    if (checkWinner(newBoard, HUMAN)) return -10;
+    if (checkWinner(newBoard, AI)) return 10;
+    if (isDraw()) return 0;
+
+    if (isMaximizing) {
+      let bestScore = -Infinity;
+      for (let i = 0; i < 9; i++) {
+        if (newBoard[i] === "") {
+          newBoard[i] = AI;
+          let score = minimax(newBoard, depth + 1, false);
+          newBoard[i] = "";
+          bestScore = Math.max(score, bestScore);
+        }
+      }
+      return bestScore;
+    } else {
+      let bestScore = Infinity;
+      for (let i = 0; i < 9; i++) {
+        if (newBoard[i] === "") {
+          newBoard[i] = HUMAN;
+          let score = minimax(newBoard, depth + 1, true);
+          newBoard[i] = "";
+          bestScore = Math.min(score, bestScore);
+        }
+      }
+      return bestScore;
+    }
+  }
+
+  function checkWinner(b, player) {
+    return winCombos.some(combo => combo.every(i => b[i] === player));
+  }
+
+  function getWinningCombo(player) {
+    return winCombos.find(combo => combo.every(i => board[i] === player));
+  }
+
+  function highlightWinner(player) {
+    const winCombo = getWinningCombo(player);
+    if (winCombo) {
+      winCombo.forEach(i => {
+        cells[i].classList.add('win');
+      });
+    }
+  }
+
+  function isDraw() {
+    return board.every(cell => cell !== "");
+  }
+
+  function endGame(message) {
+    document.getElementById("status").textContent = message;
+    gameOver = true;
+  }
+
+  function resetGame() {
+    board = ["", "", "", "", "", "", "", "", ""];
+    gameOver = false;
+    document.getElementById("status").textContent = '';
+    cells.forEach(cell => {
+      cell.textContent = "";
+      cell.classList.remove("win");
+    });
+  }
+
+  createBoard();
+</script>
+
+</body>
+</html>
