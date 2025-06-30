@@ -79,3 +79,81 @@ model, vocab = load_model('model_checkpoint.pth', embed_size=256, hidden_size=51
 ## 📝 License
 
 This project is open source and available under the MIT License.
+
+# Rule-Based Chatbot
+
+A simple implementation of a rule-based chatbot in Python that demonstrates basic natural language processing and conversation flow.
+
+## Features
+
+- Pattern-based response system
+- Multiple response variations for each pattern
+- Input preprocessing
+- Rotating response selection
+- Default responses for unknown queries
+- Interactive command-line interface
+
+## Response Categories
+
+The chatbot can respond to:
+- Greetings (hello)
+- Well-being questions (how are you)
+- Farewells (bye)
+- Identity questions (name)
+- Help requests (help)
+- Weather queries
+- Time queries
+- Expressions of gratitude (thanks)
+
+## Usage
+
+1. Run the script:
+```bash
+python chatbot.py
+```
+
+2. Start chatting with the bot. Type messages and press Enter.
+
+3. Type 'bye' to end the conversation.
+
+## Example Conversation
+
+```
+ChatBot: Hi! I'm a simple rule-based chatbot. Type 'bye' to exit.
+You: hello
+ChatBot: Hi there!
+You: what's your name
+ChatBot: I'm ChatBot, nice to meet you!
+You: how are you
+ChatBot: I'm doing well, thank you!
+You: bye
+ChatBot: Goodbye!
+```
+
+## Extending the Chatbot
+
+To add new response patterns:
+1. Add new key-value pairs to the `response_rules` dictionary in the `__init__` method
+2. The key should be the pattern to match
+3. The value should be a list of possible responses
+
+Example:
+```python
+'new_pattern': ['Response 1', 'Response 2', 'Response 3']
+```
+
+## Limitations
+
+- Uses simple pattern matching
+- No context awareness
+- Cannot handle complex queries
+- No memory of conversation history
+- Limited to predefined responses
+
+## Future Improvements
+
+- Add regular expression pattern matching
+- Implement context awareness
+- Add conversation memory
+- Integrate with external APIs
+- Add natural language processing capabilities
