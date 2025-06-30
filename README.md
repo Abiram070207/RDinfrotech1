@@ -156,7 +156,9 @@ Example:
 - Implement context awareness
 - Add conversation memory
 - Integrate with external APIs
-- Add natural language processing capabilities
+- Add natural language processing capabilities.
+
+# TIC TAC TOE AI game:
 
 I've created a comprehensive AI Tic-Tac-Toe game with multiple difficulty levels and a beautiful, interactive interface. Here are the key features:
 ## 🧠 AI Algorithms Implemented:
