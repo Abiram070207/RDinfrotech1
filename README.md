@@ -650,12 +650,8 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## 📞 Contact
 
-- **GitHub**: [@yourusername](https://github.com/yourusername)
-- **Email**: your.email@example.com
-- **LinkedIn**: [Your LinkedIn Profile](https://linkedin.com/in/yourprofile)
+- **GitHub**: [@Abiram070207](https://github.com/Abiram070207)
+- **Email**: abiram.r1010@gmail.com
+- **LinkedIn**: www.linkedin.com/in/abiram-r-23aa3b303
 
----
-
-**Built with ❤️ and vanilla JavaScript**
-
-*Demonstrating the power of client-side machine learning and modern web technologies*
+**Built with ❤️
