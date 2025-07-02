@@ -655,3 +655,32 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 - **LinkedIn**: www.linkedin.com/in/abiram-r-23aa3b303
 
 **Built with ❤️
+
+# AI Face Detection Web Application
+
+A real-time face detection web application built using HTML, CSS, and JavaScript. This application uses machine learning to detect and track faces through your webcam feed in real-time.
+
+## 🌟 Features
+
+- Real-time face detection using webcam
+- Multiple face detection support
+- Face landmark detection (eyes, nose, mouth)
+- Adjustable detection sensitivity
+- Responsive design for all devices
+- Cross-browser compatibility
+- Performance optimization for smooth detection
+
+## 🛠️ Technologies Used
+
+- HTML5 (WebRTC for camera access)
+- CSS3 (Flexbox/Grid for layout)
+- JavaScript (ES6+)
+- Face-API.js (ML model)
+- Canvas API for drawing
+- WebRTC for camera stream
+
+## 📋 Prerequisites
+
+- Modern web browser (Chrome, Firefox, Safari)
+- Webcam access
+- Internet connection (for loading ML models)
